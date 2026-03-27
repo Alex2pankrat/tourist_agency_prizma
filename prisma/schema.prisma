@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Категория тура
+model Category {
+  id          String   @id @default(cuid())
+  name        String   // Название категории
+  description String?  // Описание категории (опционально)
+  createdAt   DateTime @default(now())
+  tours       Tour[]   // Связь с турами
+}
+
+// Тур
+model Tour {
+  id          String   @id @default(cuid())
+  title       String   // Название тура
+  description String?  // Описание тура
+  price       Decimal  // Цена
+  duration    Int      // Длительность в днях
+  imageUrl    String?  // URL изображения (опционально)
+  createdAt   DateTime @default(now())
+  categoryId  String   // Внешний ключ категории
+  category    Category @relation(fields: [categoryId], references: [id])
+  saleItems   SaleItem[] // Связь с позициями продаж
+}
+
+// Клиент
+model Client {
+  id        String   @id @default(cuid())
+  name      String   // Имя клиента
+  email     String?  // Email (опционально)
+  phone     String?  // Телефон (опционально)
+  createdAt DateTime @default(now())
+  sales     Sale[]   // Связь с продажами
+}
+
+// Продажа (заказ)
+model Sale {
+  id          String   @id @default(cuid())
+  clientId    String   // Внешний ключ клиента
+  client      Client   @relation(fields: [clientId], references: [id])
+  totalAmount Decimal  // Общая сумма заказа
+  status      String   @default("pending") // Статус заказа (pending, confirmed, completed, cancelled)
+  createdAt   DateTime @default(now())
+  items       SaleItem[] // Позиции заказа
+}
+
+// Позиция продажи
+model SaleItem {
+  id        String  @id @default(cuid())
+  saleId    String  // Внешний ключ продажи
+  sale      Sale    @relation(fields: [saleId], references: [id])
+  tourId    String  // Внешний ключ тура
+  tour      Tour    @relation(fields: [tourId], references: [id])
+  quantity  Int     @default(1) // Количество
+  price     Decimal // Цена на момент покупки
+}
