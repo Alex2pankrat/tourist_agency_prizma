@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Разрешаем загрузку изображений с Unsplash для демонстрации
+  // Разрешаем загрузку изображений для демонстрации
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.mds.yandex.net',
       },
     ],
   },

@@ -59,6 +59,10 @@ async function main() {
 
   // Создаем туры
   console.log('🏖️ Создание туров...')
+  
+  // Единое изображение для всех туров (с указанием размера)
+  const defaultImageUrl = 'https://avatars.mds.yandex.net/i?id=a6c5aaa418978432ba89779d73cb9244_l-4032215-images-thumbs&n=13&w=800&h=600'
+  
   const tours = await Promise.all([
     // Пляжные туры
     prisma.tour.create({
@@ -67,7 +71,7 @@ async function main() {
         description: 'Недельный отдых на берегу Средиземного моря в отеле 5*. Все включено.',
         price: 85000,
         duration: 7,
-        imageUrl: 'https://images.unsplash.com/photo-1528127269322-539801943592',
+        imageUrl: defaultImageUrl,
         categoryId: beachCategory.id,
       },
     }),
@@ -78,7 +82,7 @@ async function main() {
         description: '10 дней на тропическом острове. Экскурсия на Пхи-Пхи в подарок!',
         price: 120000,
         duration: 10,
-        imageUrl: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a',
+        imageUrl: defaultImageUrl,
         categoryId: beachCategory.id,
       },
     }),
@@ -89,7 +93,7 @@ async function main() {
         description: '7 дней в бунгало на воде. Полное уединение и кристально чистая вода.',
         price: 250000,
         duration: 7,
-        imageUrl: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8',
+        imageUrl: defaultImageUrl,
         categoryId: beachCategory.id,
       },
     }),
@@ -101,7 +105,7 @@ async function main() {
         description: 'Неделя на лучших горнолыжных трассах Альп. Оборудование включено.',
         price: 180000,
         duration: 7,
-        imageUrl: 'https://images.unsplash.com/photo-1551524559-8af4e6624178',
+        imageUrl: defaultImageUrl,
         categoryId: mountainCategory.id,
       },
     }),
@@ -112,7 +116,7 @@ async function main() {
         description: 'Сибирский снег и отличные трассы. 5 дней активного отдыха.',
         price: 45000,
         duration: 5,
-        imageUrl: 'https://images.unsplash.com/photo-1565992441121-4367c2967103',
+        imageUrl: defaultImageUrl,
         categoryId: mountainCategory.id,
       },
     }),
@@ -124,7 +128,7 @@ async function main() {
         description: '7 древних городов за 5 дней. Автобусный тур с гидом.',
         price: 35000,
         duration: 5,
-        imageUrl: 'https://images.unsplash.com/photo-1547448520-2a6264f7b6d2',
+        imageUrl: defaultImageUrl,
         categoryId: excursionCategory.id,
       },
     }),
@@ -135,7 +139,7 @@ async function main() {
         description: '5 дней в столице Франции. Лувр, Эйфелева башня, Версаль.',
         price: 95000,
         duration: 5,
-        imageUrl: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34',
+        imageUrl: defaultImageUrl,
         categoryId: excursionCategory.id,
       },
     }),
@@ -147,7 +151,7 @@ async function main() {
         description: '10 дней в африканской саванне. Наблюдение за большой пятеркой.',
         price: 350000,
         duration: 10,
-        imageUrl: 'https://images.unsplash.com/photo-1516426122078-c23e76319801',
+        imageUrl: defaultImageUrl,
         categoryId: exoticCategory.id,
       },
     }),
@@ -158,7 +162,7 @@ async function main() {
         description: 'Путешествие к затерянному городу инков. 8 дней приключений.',
         price: 280000,
         duration: 8,
-        imageUrl: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1',
+        imageUrl: defaultImageUrl,
         categoryId: exoticCategory.id,
       },
     }),
