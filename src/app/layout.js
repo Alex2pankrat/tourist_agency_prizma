@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>{dropdownHoverCSS}</style>
       </head>
       <body>
         <Providers>
@@ -32,7 +33,13 @@ export default function RootLayout({ children }) {
                 <a href="/tours" style={styles.link}>Каталог туров</a>
                 <a href="/cart" style={styles.link}>Корзина</a>
                 <a href="/sales" style={styles.link}>История продаж</a>
-                <a href="/admin/tours" style={styles.adminLink}>Админ-панель</a>
+                <div style={styles.adminDropdown} data-admin-dropdown>
+                  <span style={styles.adminLink}>⚙️ Админ</span>
+                  <div style={styles.dropdownContent} data-dropdown-content>
+                    <a href="/admin/tours" style={styles.dropdownLink}>Управление турами</a>
+                    <a href="/admin/sales" style={styles.dropdownLink}>Управление продажами</a>
+                  </div>
+                </div>
               </div>
             </nav>
           </header>
@@ -71,17 +78,44 @@ const styles = {
   links: {
     display: 'flex',
     gap: '2rem',
+    alignItems: 'center',
   },
   link: {
     color: 'white',
     textDecoration: 'none',
     fontSize: '1rem',
   },
+  adminDropdown: {
+    position: 'relative',
+    display: 'inline-block',
+  },
   adminLink: {
     color: '#fbbf24',
     textDecoration: 'none',
     fontSize: '1rem',
     fontWeight: '500',
+    cursor: 'pointer',
+    padding: '0.5rem',
+  },
+  dropdownContent: {
+    display: 'none',
+    position: 'absolute',
+    top: '100%',
+    right: 0,
+    backgroundColor: 'white',
+    minWidth: '200px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    borderRadius: '0.375rem',
+    overflow: 'hidden',
+    zIndex: 1000,
+  },
+  dropdownLink: {
+    display: 'block',
+    padding: '0.75rem 1rem',
+    color: '#1f2937',
+    textDecoration: 'none',
+    fontSize: '0.875rem',
+    transition: 'background-color 0.2s',
   },
   main: {
     minHeight: 'calc(100vh - 200px)',
@@ -97,3 +131,13 @@ const styles = {
     marginTop: '2rem',
   },
 }
+
+// CSS для hover эффекта выпадающего меню
+const dropdownHoverCSS = `
+  [data-admin-dropdown]:hover [data-dropdown-content] {
+    display: block !important;
+  }
+  .dropdownLink:hover {
+    background-color: #f3f4f6;
+  }
+`

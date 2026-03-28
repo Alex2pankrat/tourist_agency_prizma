@@ -8,14 +8,9 @@ export default function HomePage() {
       <section style={styles.hero}>
         <h1 style={styles.title}>Добро пожаловать в Prizma Travel!</h1>
         <p style={styles.subtitle}>Ваше идеальное путешествие начинается здесь</p>
-        <div style={styles.heroButtons}>
-          <a href="/tours" style={styles.button}>
-            Смотреть каталог туров
-          </a>
-          <a href="/admin/tours" style={styles.secondaryButton}>
-            Управление турами
-          </a>
-        </div>
+        <a href="/tours" style={styles.button}>
+          Смотреть каталог туров
+        </a>
       </section>
 
       {/* Навигация по разделам */}
@@ -115,12 +110,6 @@ const styles = {
     color: 'rgba(255,255,255,0.9)',
     marginBottom: '2rem',
   },
-  heroButtons: {
-    display: 'flex',
-    gap: '1rem',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-  },
   button: {
     display: 'inline-block',
     backgroundColor: 'white',
@@ -131,18 +120,6 @@ const styles = {
     fontSize: '1.2rem',
     fontWeight: 'bold',
     transition: 'transform 0.2s',
-  },
-  secondaryButton: {
-    display: 'inline-block',
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    color: 'white',
-    padding: '1rem 2rem',
-    borderRadius: '0.5rem',
-    textDecoration: 'none',
-    fontSize: '1.2rem',
-    fontWeight: 'bold',
-    transition: 'transform 0.2s',
-    border: '2px solid white',
   },
   navigation: {
     padding: '2rem 0',
