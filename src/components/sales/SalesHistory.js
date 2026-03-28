@@ -61,9 +61,12 @@ export default function SalesHistory() {
         throw new Error('Не удалось загрузить историю продаж')
       }
 
-      const data = await response.json()
-      setSales(data.data)
-      setPagination(data.pagination)
+      const responseData = await response.json()
+      
+      // Новый API возвращает { success: true, data: [...] }
+      const salesData = responseData.data || []
+      setSales(salesData)
+      setPagination(responseData.pagination || null)
     } catch (err) {
       console.error('Ошибка при загрузке:', err)
       setError(err.message)

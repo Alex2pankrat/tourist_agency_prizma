@@ -62,10 +62,13 @@ export default function CheckoutPage() {
 
       if (!response.ok) {
         const data = await response.json()
-        throw new Error(data.error || 'Не удалось оформить заказ')
+        throw new Error(data.error || data.message || 'Не удалось оформить заказ')
       }
 
-      const sale = await response.json()
+      const responseData = await response.json()
+      
+      // Новый API возвращает { success: true, data: {...} }
+      const sale = responseData.data || responseData
 
       // Очистка корзины
       clearCart()

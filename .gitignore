@@ -18,6 +18,7 @@ out/
 # Продакшн
 build/
 dist/
+docs/
 
 # Тестирование
 coverage/

@@ -61,8 +61,16 @@ export default function SaleDetailPage() {
         throw new Error('Заказ не найден')
       }
 
-      const data = await response.json()
-      setSale(data)
+      const responseData = await response.json()
+      
+      // Новый API возвращает { success: true, data: {...} }
+      const saleData = responseData.data || responseData
+      
+      if (!saleData || !saleData.id) {
+        throw new Error('Некорректный ответ сервера')
+      }
+      
+      setSale(saleData)
     } catch (err) {
       console.error('Ошибка при загрузке:', err)
       setError(err.message)

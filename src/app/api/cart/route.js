@@ -1,62 +1,30 @@
 /**
- * API endpoint для корзины
- * GET /api/cart - получить корзину (для серверных операций)
- * 
- * Примечание: Корзина хранится в localStorage на клиенте
- * Этот endpoint используется для серверной валидации и синхронизации
+ * API endpoint для работы с корзиной
+ * GET /api/cart - получить содержимое корзины
+ * DELETE /api/cart/clear - очистить корзину
  */
 
-import { NextResponse } from 'next/server'
+import { cartController } from '@/controllers/CartController.js'
+import { withLogger } from '@/middleware/logger.js'
 
 /**
- * GET handler для получения информации о корзине
- * Возвращает пустую структуру для клиентской синхронизации
+ * GET handler для получения содержимого корзины
+ * @param {Request} request - HTTP запрос
+ * @returns {Promise<Response>} Корзина в формате JSON
  */
-export async function GET() {
-  try {
-    // На сервере корзина пуста (клиентское хранилище)
-    // Клиент сам управляет корзиной через localStorage
-    return NextResponse.json({
-      items: [],
-      total: 0,
-      itemCount: 0,
-    })
-  } catch (error) {
-    console.error('Ошибка при получении корзины:', error)
-    return NextResponse.json(
-      { error: 'Не удалось получить корзину' },
-      { status: 500 }
-    )
-  }
+export async function GET(request) {
+  return withLogger(async () => {
+    return await cartController.get(request)
+  }, request)
 }
 
 /**
- * POST handler для оформления заказа из корзины
- * @param {Request} request - HTTP запрос с данными заказа
+ * DELETE handler для очистки корзины
+ * @param {Request} request - HTTP запрос
+ * @returns {Promise<Response>} Очищенная корзина в формате JSON
  */
-export async function POST(request) {
-  try {
-    const body = await request.json()
-    const { items, clientData } = body
-    
-    // Валидация
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return NextResponse.json(
-        { error: 'Корзина пуста' },
-        { status: 400 }
-      )
-    }
-    
-    // Возвращаем данные для клиентской обработки
-    return NextResponse.json({
-      message: 'Корзина готова к оформлению',
-      items,
-    })
-  } catch (error) {
-    console.error('Ошибка при обработке корзины:', error)
-    return NextResponse.json(
-      { error: 'Не удалось обработать корзину' },
-      { status: 500 }
-    )
-  }
+export async function DELETE(request) {
+  return withLogger(async () => {
+    return await cartController.clear(request)
+  }, request)
 }
