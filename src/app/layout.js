@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import Providers from './Providers'
 
 /**
  * Метаданные для всего приложения
@@ -23,21 +24,25 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <header style={styles.header}>
-          <nav style={styles.nav}>
-            <a href="/" style={styles.logo}>Prizma Travel</a>
-            <div style={styles.links}>
-              <a href="/tours" style={styles.link}>Каталог туров</a>
-              <a href="/cart" style={styles.link}>Корзина</a>
-            </div>
-          </nav>
-        </header>
-        <main style={styles.main}>
-          {children}
-        </main>
-        <footer style={styles.footer}>
-          <p>&copy; 2026 Prizma Travel. Все права защищены.</p>
-        </footer>
+        <Providers>
+          <header style={styles.header}>
+            <nav style={styles.nav}>
+              <a href="/" style={styles.logo}>Prizma Travel</a>
+              <div style={styles.links}>
+                <a href="/tours" style={styles.link}>Каталог туров</a>
+                <a href="/cart" style={styles.link}>Корзина</a>
+                <a href="/sales" style={styles.link}>История продаж</a>
+                <a href="/admin/tours" style={styles.adminLink}>Админ-панель</a>
+              </div>
+            </nav>
+          </header>
+          <main style={styles.main}>
+            {children}
+          </main>
+          <footer style={styles.footer}>
+            <p>&copy; 2026 Prizma Travel. Все права защищены.</p>
+          </footer>
+        </Providers>
       </body>
     </html>
   )
@@ -71,6 +76,12 @@ const styles = {
     color: 'white',
     textDecoration: 'none',
     fontSize: '1rem',
+  },
+  adminLink: {
+    color: '#fbbf24',
+    textDecoration: 'none',
+    fontSize: '1rem',
+    fontWeight: '500',
   },
   main: {
     minHeight: 'calc(100vh - 200px)',

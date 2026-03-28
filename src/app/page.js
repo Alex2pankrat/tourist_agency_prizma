@@ -8,9 +8,49 @@ export default function HomePage() {
       <section style={styles.hero}>
         <h1 style={styles.title}>Добро пожаловать в Prizma Travel!</h1>
         <p style={styles.subtitle}>Ваше идеальное путешествие начинается здесь</p>
-        <a href="/tours" style={styles.button}>
-          Смотреть каталог туров
-        </a>
+        <div style={styles.heroButtons}>
+          <a href="/tours" style={styles.button}>
+            Смотреть каталог туров
+          </a>
+          <a href="/admin/tours" style={styles.secondaryButton}>
+            Управление турами
+          </a>
+        </div>
+      </section>
+
+      {/* Навигация по разделам */}
+      <section style={styles.navigation}>
+        <h2 style={styles.navigationTitle}>Разделы сайта</h2>
+        <div style={styles.navGrid}>
+          <a href="/tours" style={styles.navCard}>
+            <span style={styles.navIcon}>🏖️</span>
+            <h3 style={styles.navTitle}>Каталог туров</h3>
+            <p style={styles.navText}>
+              Просмотр и фильтрация туров по категориям, цене и длительности
+            </p>
+          </a>
+          <a href="/cart" style={styles.navCard}>
+            <span style={styles.navIcon}>🛒</span>
+            <h3 style={styles.navTitle}>Корзина</h3>
+            <p style={styles.navText}>
+              Управление выбранными турами и оформление заказа
+            </p>
+          </a>
+          <a href="/sales" style={styles.navCard}>
+            <span style={styles.navIcon}>📋</span>
+            <h3 style={styles.navTitle}>История продаж</h3>
+            <p style={styles.navText}>
+              Просмотр всех оформленных заказов и их деталей
+            </p>
+          </a>
+          <a href="/admin/tours" style={styles.navCard}>
+            <span style={styles.navIcon}>⚙️</span>
+            <h3 style={styles.navTitle}>Админ-панель</h3>
+            <p style={styles.navText}>
+              Управление турами: создание, редактирование, удаление
+            </p>
+          </a>
+        </div>
       </section>
 
       <section style={styles.features}>
@@ -75,6 +115,12 @@ const styles = {
     color: 'rgba(255,255,255,0.9)',
     marginBottom: '2rem',
   },
+  heroButtons: {
+    display: 'flex',
+    gap: '1rem',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
   button: {
     display: 'inline-block',
     backgroundColor: 'white',
@@ -85,6 +131,57 @@ const styles = {
     fontSize: '1.2rem',
     fontWeight: 'bold',
     transition: 'transform 0.2s',
+  },
+  secondaryButton: {
+    display: 'inline-block',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    color: 'white',
+    padding: '1rem 2rem',
+    borderRadius: '0.5rem',
+    textDecoration: 'none',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    transition: 'transform 0.2s',
+    border: '2px solid white',
+  },
+  navigation: {
+    padding: '2rem 0',
+  },
+  navigationTitle: {
+    fontSize: '2rem',
+    textAlign: 'center',
+    marginBottom: '2rem',
+    color: '#1e3a8a',
+  },
+  navGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1.5rem',
+  },
+  navCard: {
+    backgroundColor: '#f9fafb',
+    padding: '2rem',
+    borderRadius: '0.5rem',
+    textAlign: 'center',
+    textDecoration: 'none',
+    transition: 'transform 0.2s, box-shadow 0.2s',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+  },
+  navIcon: {
+    fontSize: '3rem',
+    marginBottom: '1rem',
+    display: 'block',
+  },
+  navTitle: {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    color: '#1f2937',
+    marginBottom: '0.5rem',
+  },
+  navText: {
+    fontSize: '0.875rem',
+    color: '#6b7280',
+    lineHeight: '1.5',
   },
   features: {
     padding: '2rem 0',
